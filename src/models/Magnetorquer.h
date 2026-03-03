@@ -62,8 +62,8 @@ namespace modelspace {
         int16 start() override;
         int16 execute() override;
         
-        CartesianVector3 torque_internal;
-        CartesianVector3 m;
+        CartesianVector3 _torque;
+        CartesianVector3 _m;
     };
 
 }

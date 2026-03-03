@@ -27,6 +27,8 @@ aliases = {"m_prime_x" : "m prime for the x-axis magnetorquer, # of wire turns (
 #include "modelspace/core/CartesianVector.hpp"
 #include "modelspace/core/safemath.h"
 
+#include "Magnetorquer.h"
+
 namespace modelspace {
 
     /**
@@ -77,12 +79,23 @@ namespace modelspace {
     protected:
         int16 start() override;
         int16 execute() override;
+
+        void _configureInternal();
         
-        CartesianVector3 torque_internal;
+        // Internal torque varible
+        // Calculations are stored to this, and the output torquer follows its value.
+        CartesianVector3 _torque;
+
+        // The 3 magnetorquers that make up the payload.
+        // One along each axis.
+        Magnetorquer _magnetorquer_x;
+        Magnetorquer _magnetorquer_y;
+        Magnetorquer _magnetorquer_z;
         
-        CartesianVector3 m_x;
-        CartesianVector3 m_y;
-        CartesianVector3 m_z;
+        // Magnetic dipole vectors of each magnetorquer.
+        CartesianVector3 _m_x;
+        CartesianVector3 _m_y;
+        CartesianVector3 _m_z;
     };
 
 }

@@ -55,17 +55,11 @@ namespace modelspace
         return NO_ERROR;
     }
 
+    /**
+     * Called at simulation start. Does nothing currently, but any start of sim calculations can go here.
+     */
     int16 Magnetorquer::start()
     {
-        // Code used to configure the model goes here. This function runs once
-        // at simulation start... Slope Intercept model doesn't have anything for
-        // this, but this is where files should be loaded and items should be
-        // pre-calculated.
-
-        // Model functions always return an error code. NO_ERROR means everything
-        // went fine, and is an alias for 0. Anything nonzero is intepreted by
-        // the sim as an error
-
         return NO_ERROR;
     }
 
@@ -75,11 +69,11 @@ namespace modelspace
         // Guide, valid steps are START_STEP, DERIVATIVE, and END_STEP. In general
         // here is where you should write values to all outputs on the basis of
         // inputs and params.
-        m = inputs.I() * params.m_prime();
+        _m = inputs.I() * params.m_prime();
         // torque = m x B.
-        cross(m, inputs.B(), torque_internal);
+        cross(_m, inputs.B(), _torque);
 
-        outputs.torque(torque_internal);
+        outputs.torque(_torque);
 
         // Model functions always return an error code. NO_ERROR means everything
         // went fine, and is an alias for 0. Anything nonzero is intepreted by
